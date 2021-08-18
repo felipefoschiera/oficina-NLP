@@ -1,0 +1,49 @@
+preprocess:
+  cmd: python -m spacy run preprocess
+  script:
+    - python scripts/preprocess.py assets/fashion_brands_training.jsonl corpus/fashion_brands_training.spacy
+    - python scripts/preprocess.py assets/fashion_brands_eval.jsonl corpus/fashion_brands_eval.spacy
+  deps:
+    - path: assets/fashion_brands_training.jsonl
+      md5: 63373dd656daa1fd3043ce166a59474c
+    - path: assets/fashion_brands_eval.jsonl
+      md5: 5113dc04e03f079525edd8df3f4f39e3
+    - path: scripts/preprocess.py
+      md5: a1a912a37d5a490951cd6b8f819652ab
+  outs:
+    - path: corpus/fashion_brands_training.spacy
+      md5: 091356654aa1746555cf8e601c245a66
+    - path: corpus/fashion_brands_eval.spacy
+      md5: 9ca87d0e0a330acdcfeec7360ba3495e
+  spacy_version: 3.1.1
+  spacy_git_version: ffaead8fe
+train:
+  cmd: python -m spacy run train
+  script:
+    - python -m spacy train configs/config.cfg --output training/ --paths.train corpus/fashion_brands_training.spacy
+      --paths.dev corpus/fashion_brands_eval.spacy
+  deps:
+    - path: corpus/fashion_brands_training.spacy
+      md5: 091356654aa1746555cf8e601c245a66
+    - path: corpus/fashion_brands_eval.spacy
+      md5: 9ca87d0e0a330acdcfeec7360ba3495e
+  outs:
+    - path: training/model-best
+      md5: 332b4879eb25420057f8ee492672032d
+  spacy_version: 3.1.1
+  spacy_git_version: ffaead8fe
+evaluate:
+  cmd: python -m spacy run evaluate
+  script:
+    - python -m spacy evaluate training/model-best corpus/fashion_brands_eval.spacy
+      --output training/metrics.json
+  deps:
+    - path: corpus/fashion_brands_eval.spacy
+      md5: 9ca87d0e0a330acdcfeec7360ba3495e
+    - path: training/model-best
+      md5: 332b4879eb25420057f8ee492672032d
+  outs:
+    - path: training/metrics.json
+      md5: 27e7021509ea8fe170ca7033b73eb238
+  spacy_version: 3.1.1
+  spacy_git_version: ffaead8fe
