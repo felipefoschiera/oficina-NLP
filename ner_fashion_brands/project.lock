@@ -15,8 +15,8 @@ preprocess:
       md5: 091356654aa1746555cf8e601c245a66
     - path: corpus/fashion_brands_eval.spacy
       md5: 9ca87d0e0a330acdcfeec7360ba3495e
-  spacy_version: 3.1.1
-  spacy_git_version: ffaead8fe
+  spacy_version: 3.1.2
+  spacy_git_version: e1f88de72
 train:
   cmd: python -m spacy run train
   script:
@@ -29,9 +29,9 @@ train:
       md5: 9ca87d0e0a330acdcfeec7360ba3495e
   outs:
     - path: training/model-best
-      md5: 332b4879eb25420057f8ee492672032d
-  spacy_version: 3.1.1
-  spacy_git_version: ffaead8fe
+      md5: 5647e5363d1581ffdfdafabd1b3c51bc
+  spacy_version: 3.1.2
+  spacy_git_version: e1f88de72
 evaluate:
   cmd: python -m spacy run evaluate
   script:
@@ -41,9 +41,9 @@ evaluate:
     - path: corpus/fashion_brands_eval.spacy
       md5: 9ca87d0e0a330acdcfeec7360ba3495e
     - path: training/model-best
-      md5: 332b4879eb25420057f8ee492672032d
+      md5: 5647e5363d1581ffdfdafabd1b3c51bc
   outs:
     - path: training/metrics.json
-      md5: 27e7021509ea8fe170ca7033b73eb238
-  spacy_version: 3.1.1
-  spacy_git_version: ffaead8fe
+      md5: 1862dd7b25e11d39ee5ca65929eac123
+  spacy_version: 3.1.2
+  spacy_git_version: e1f88de72
