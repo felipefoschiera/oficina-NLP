@@ -1,7 +1,7 @@
 import spacy
 from spacy import displacy
 
-nlp = spacy.load('pt_core_news_lg')
+nlp = spacy.load('pt_core_news_sm')
 
 text = """
 A Xiaomi ultrapassou a Apple (AAPL) e se tornou a segunda maior fabricante de smartphones do mundo pela primeira vez, de acordo com a empresa de pesquisa de mercado Canalys.
