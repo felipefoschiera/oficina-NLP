@@ -29,7 +29,7 @@ train:
       md5: 9ca87d0e0a330acdcfeec7360ba3495e
   outs:
     - path: training/model-best
-      md5: 5647e5363d1581ffdfdafabd1b3c51bc
+      md5: a5735a9ddeb82e14b1469d68acf4c469
   spacy_version: 3.1.2
   spacy_git_version: e1f88de72
 evaluate:
@@ -41,9 +41,22 @@ evaluate:
     - path: corpus/fashion_brands_eval.spacy
       md5: 9ca87d0e0a330acdcfeec7360ba3495e
     - path: training/model-best
-      md5: 5647e5363d1581ffdfdafabd1b3c51bc
+      md5: a5735a9ddeb82e14b1469d68acf4c469
   outs:
     - path: training/metrics.json
-      md5: 303ccf8e1cd862b2c62e9233a4269804
+      md5: 7bd36085f3cbb3c5f3eede318b30027f
+  spacy_version: 3.1.2
+  spacy_git_version: e1f88de72
+package:
+  cmd: python -m spacy run package
+  script:
+    - python -m spacy package training/model-best packages --name ner_fashion --version
+      0.0.0 --force
+  deps:
+    - path: training/model-best
+      md5: a5735a9ddeb82e14b1469d68acf4c469
+  outs:
+    - path: packages/en_ner_fashion-0.0.0/dist/en_ner_fashion-0.0.0.tar.gz
+      md5: de2e6132d382a6f871d4012518868e12
   spacy_version: 3.1.2
   spacy_git_version: e1f88de72

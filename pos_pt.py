@@ -20,15 +20,40 @@
     - VERB: verb                        / verbo
     - X: other                          / outros
 
+    Frases:
+    - O aluno participou do Linux Day na quinta-feira.
+    - A Apple lançou um produto muito caro na semana passada.
 '''
+
+dicionario = {
+    'ADJ': 'ADJETIVO',
+    'ADP': 'ADPOSIÇÃO',
+    'ADV': 'ADVÉRBIO',
+    'AUX': 'VERBO AUXILIAR',
+    'CONJ': 'CONJUNÇÃO',
+    'DET': 'DETERMINADOR',
+    'INTJ': 'INTERJEIÇÃO',
+    'NOUN': 'SUBSTANTIVO',
+    'NUM': 'NUMERAL',
+    'PART': 'PARTÍCULA GRAMATICAL',
+    'PRON': 'PRONOME',
+    'PROPN': 'NOME PRÓPRIO',
+    'PUNCT': 'PONTUAÇÃO',
+    'SCONJ': 'CONJUNÇÃO SUBORDINATIVA',
+    'SYM': 'SÍMBOLO',
+    'VERB': 'VERBO'
+}
 
 import spacy
 
 nlp = spacy.load('pt_core_news_sm')
-doc = nlp('O aluno participou do Linux Day na quinta-feira.')
+doc = nlp('A Apple lançou um produto muito caro na semana passada.')
 
-print("{:<15} {:<10} {:<10} {:<10}".format("TEXT", "POS", "TAG", "DEP"))
+print("{:<15} {:<10} {:<10} {:<10} {:<20}".format("TEXT", "POS", "TAG", "DEP", "CLASSE"))
 
 for token in doc:
-    print("{:<15} {:<10} {:<10} {:<10}".format(
-        token.text, token.pos_, token.tag_, token.dep_))
+    classe = None
+    if token.pos_ in dicionario:
+        classe = dicionario[token.pos_]
+    print("{:<15} {:<10} {:<10} {:<10} {:<20}".format(
+        token.text, token.pos_, token.tag_, token.dep_, classe))
